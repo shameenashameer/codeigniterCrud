@@ -47,7 +47,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Employee Data</title>
+  <title>Add Costumer Data</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
@@ -86,8 +86,8 @@
     <div class="col-md-12 mt-4">
       <div class="card">
         <div class="card-header">
-          <h5>Add Employee Data
-            <a href="<?php echo base_url('employee/emp');?>" class="btn btn-danger btn-sm float-right btn-back">Back</a>
+          <h5>Add Costumer Data
+            <a href="<?php echo base_url('employee/costumers');?>" class="btn btn-danger btn-sm float-right btn-back">Back</a>
           </h5>
         </div>
         <div class="card-body">
@@ -100,14 +100,36 @@
             </div>
             <div class="form-group">
               <label for="phone">Phone No</label>
-              <input type="text" name="phone" class="form-control">
+              <input type="text" name="phone" value="" class="form-control">
               <small><?php echo form_error('phone'); ?></small>
 
             </div>
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="text" name="email" class="form-control">
-              <small ><?php echo form_error('email'); ?></small>
+              <label for="phone">Date</label>
+              <input type="date" id="date" name="date" value="" class="form-control">
+              <small><?php echo form_error('date'); ?></small>
+
+            </div>
+            <div class="form-group">
+              <label for="phone">Amount</label>
+              <input type="text" name="amount" value="" class="form-control">
+              <small><?php echo form_error('amount'); ?></small>
+
+            </div>
+            <div class="form-group">
+              <label for="email">Credit</label>
+              <input type="text" name="credit" value="" class="form-control">
+              <small ><?php echo form_error('credit'); ?></small>
+            </div>
+            <!-- <div class="form-group">
+              <label for="email">Debit</label>
+              <input type="text" name="debit" class="form-control">
+              < <small ><?php //echo form_error('debit'); ?></small> 
+            </div> -->
+            <div class="form-group">
+              <!-- <label for="balance">Balance</label> -->
+              <input type="hidden" name="balance" value="balance" class="form-control">
+              <!-- <small ><?php// echo form_error('balance'); ?></small> -->
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Save</button> 
@@ -118,6 +140,5 @@
     </div>
   </div>
 </div>
-
 </body>
 </html>

@@ -53,7 +53,9 @@ $route['default_controller'] = 'Emlpoyee';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-
+// $route['home/customers'] = 'home/customers';
+// $route['home/purchase'] = 'home/purchase';
+// $route['home/staffs'] = 'home/staffs';
 
 // $route['employee'] = "employee/emp";
 // $route['employee/create'] = "employee/create";
