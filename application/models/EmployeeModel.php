@@ -22,6 +22,14 @@ class EmployeeModel extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+    public function getShops() {
+        $this->db->select('shops.id, shops.shop_name, shops.phone, MAX(stocks.date) as date, SUM(stocks.amount) as total_amount, SUM(stocks.debit) as total_debit, SUM(stocks.amount - stocks.debit) as balance_sum');
+        $this->db->from('shops');
+        $this->db->join('stocks', 'shops.id = stocks.shop_id', 'left');
+        $this->db->group_by('shops.id');
+        $query = $this->db->get();
+        return $query->result();
+    }
     public function getCostomerPurchaseDataWithBalance($id){
         $this->db->select('id,name,phone, date, amount, credit, (amount - credit) as balance');
         $this->db->where('id', $id);
@@ -55,8 +63,23 @@ class EmployeeModel extends CI_Model
 //     }
     public function get_balance_sum() {
         $this->db->select_sum('balance');
-        $query = $this->db->get('students');
+        $query = $this->db->get('purchases');
         return $query->row()->balance;
+    }
+    public function get_stock_balance_sum() {
+        $this->db->select_sum('balance');
+        $query = $this->db->get('stocks');
+        return $query->row()->balance;
+    }
+    public function get_stock_amount_sum() {
+        $this->db->select_sum('amount');
+        $query = $this->db->get('stocks');
+        return $query->row()->amount;
+    }
+    public function get_stock_debit_sum() {
+        $this->db->select_sum('debit');
+        $query = $this->db->get('stocks');
+        return $query->row()->debit;
     }
     public function get_costomer_balance_sum($id) {
         $this->db->select_sum('balance');
@@ -79,13 +102,13 @@ class EmployeeModel extends CI_Model
     
     public function get_amount_sum() {
         $this->db->select_sum('amount');
-        $query = $this->db->get('students');
+        $query = $this->db->get('purchases');
         return $query->row()->amount;
     }
     
     public function get_credit_sum() {
         $this->db->select_sum('credit');
-        $query = $this->db->get('students');
+        $query = $this->db->get('purchases');
         return $query->row()->credit;
     }
     
@@ -97,6 +120,7 @@ class EmployeeModel extends CI_Model
     }
     public function insert_purchase($data,$id)
     {
+        
         // $data['name'] = $data['id'] - $data['credit'];
         $data['balance'] = $data['amount'] - $data['credit'];
         $data['customer_id'] = $id;
@@ -121,6 +145,10 @@ public function updateEmployee($data,$id){
 public function deleteEmployee($id){
 
    return  $this->db->delete('students', ['id' => $id]);
+}
+public function purchase_delete($id){
+
+   return  $this->db->delete('purchases', ['id' => $id]);
 }
 public function calculate_sum($customer_id, $column) {
     $this->db->select_sum($column);

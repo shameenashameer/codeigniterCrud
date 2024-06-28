@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customers</title>
+    <title>Stocks</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .card-header h5 {
@@ -33,56 +33,53 @@
                             </div>
                         <?php endif; ?>
                         <h5>
-                        Customer Name : <?php echo $customer[0]->name; ?>
-                                    <a href="<?php echo base_url('employee/add_purchase/'.$customer[0]->id); ?>" class="btn btn-primary btn-sm float-right">Add new purchase</a>
-                                    <a href="<?php echo base_url('employee/costumers');?>" class="btn btn-danger btn-sm float-right btn-back">Back</a>
+                            Shops
+                            <a href="<?php echo base_url('employee/add_shop');?>" class="btn btn-primary btn-sm">Add Shop</a>
+            <a href="<?php echo base_url('employee/landing_page');?>" class="btn btn-danger btn-sm float-right btn-back">Back</a>
 
                         </h5>
-                        <h5 style="color:red">Total Balance: <?php echo $balance_sum; ?></h5>
-
+                       
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered" id="datatable1">
-                            <thead>
+                            <thead class="thead-light">
                                 <tr class="text-center">
-                                    <!-- <th>Sl No</th> -->
-                                    <!-- <th>Name</th>
-                                    <th>Phone No</th> -->
+                                    <th>Id</th>
                                     <th>Date</th>
+
+                                    <th>Shop</th>
+                                    <th>Phone No</th>
                                     <th>Amount</th>
-                                    <th>Credit</th>
+                                    <th>Debit</th>
                                     <th>Balance</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <h5>
-                                </h5>
-                                <?php foreach($purchase as $row): ?>
+                                <?php foreach($shops as $row): ?>
                                     <tr class="text-center">
-                                        <!-- <td><?php echo $row->id; ?></td> -->
-                                        <!-- <td><?php echo $row->name; ?></td>
-                                        <td><?php echo $row->phone; ?></td> -->
+                                        <td><?php echo $row->id; ?></td>
                                         <td><?php echo $row->date; ?></td>
+
+                                        <td><a href="<?= base_url('employee/stock_details/' . $row->id); ?>"><?php echo $row->shop; ?></a></td>
+                                        <td><?php echo $row->phone; ?></td>
                                         <td style="color:blue"><?php echo $row->amount; ?></td>
-                                        <td style="color:green"><?php echo $row->credit; ?></td>
-                                        <td style="color:red"><?php echo $row->balance; ?></td>
+                                        <td style="color:green"><?php echo $row->debit; ?></td>
+                                        <td style="color:red"><?php echo $row->balance_sum; ?></td>
+                                        <!-- <td style="color:<?php echo ($employee->balance_sum > 0) ? 'red' : (($employee->balance_sum < 0) ? 'green' : 'black'); ?>"> -->
                                         <td>
                                             <a href="<?=base_url('employee/edit/'.$row->id);?>" class="btn btn-primary btn-sm">Edit</a>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url('employee/purchase_delete/'.$row->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                                            <a href="<?php echo base_url('employee/delete/'.$row->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">Delete</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-                        <!-- Uncomment these lines if you need to show total amounts -->
-                        <div class="totals text-center">
-                            <!-- <h5 style="color:blue">Total Amount: <?php echo $amount_sum; ?></h5>
-                            <h5 style="color:green">Total Credit: <?php echo $credit_sum; ?></h5> -->
-                            <!-- <h5 style="color:red">Total Balance: <?php echo $balance_sum; ?></h5> -->
+                        <div class="totals">
+                            
                         </div>
                     </div>
                 </div>

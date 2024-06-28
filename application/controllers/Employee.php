@@ -59,6 +59,25 @@ class Employee extends CI_Controller{
         $this->load->view('frondend/costumers',$data);
         $this->load->view('template/footer');
     }
+    public function shops(){
+
+        // $this->load->database();
+
+        $this->load->view('template/header');
+
+        $this->load->model("EmployeeModel");
+    //    $data['employee']= $this->EmployeeModel->getEmployee();
+
+        $data['shops']= $this->EmployeeModel->getShops();
+    //    $custumer_id= $data->id;
+        // $data['costomer']= $this->EmployeeModel->get_customer_history($custumer_id);
+        // $data['costomer_balance_sum'] = $this->EmployeeModel->get_costomer_balance_sum($employee->id);
+        $data['balance_sum'] = $this->EmployeeModel->get_stock_balance_sum();
+        $data['amount_sum'] = $this->EmployeeModel->get_stock_amount_sum();
+        $data['credit_sum'] = $this->EmployeeModel->get_stock_debit_sum();
+        $this->load->view('frondend/shops',$data);
+        $this->load->view('template/footer');
+    }
 
 public function costumer_details($id){
 
@@ -98,6 +117,12 @@ public function costumer_details($id){
 
         $this->load->view('template/header');
         $this->load->view('frondend/create');
+        $this->load->view('template/footer');
+    }
+    public function add_shop(){
+
+        $this->load->view('template/header');
+        $this->load->view('frondend/add_shop');
         $this->load->view('template/footer');
     }
     public function add_purchase($id){
@@ -234,8 +259,9 @@ public function delete($id){
 
     $this->load->model('EmployeeModel',"emp");
     $this->emp->deleteEmployee($id);
-    redirect(base_url('employee/emp'));
+    redirect(base_url('employee/costumers'));
 }
+
 
 // public function confirmDelete($id){
 

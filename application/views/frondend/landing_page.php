@@ -53,8 +53,8 @@
         <h2>Welcome to Matra Supermarket Chooralmala</h2>
         <div class="buttons">
         <a href="<?php echo base_url('employee/costumers');?>"class="btn btn-primary btn-sm float-center">Costumers</a>
-        <a href="<?php echo base_url('employee/stocks');?>"class="btn btn-primary btn-sm float-center">Stocks</a>
-        <a href="<?php echo base_url('employee/staffs');?>"class="btn btn-primary btn-sm float-center">Staffs</a>
+        <a href="<?php echo base_url('employee/shops');?>"class="btn btn-primary btn-sm float-center">Shops</a>
+        <!-- <a href="<?php echo base_url('employee/staffs');?>"class="btn btn-primary btn-sm float-center">Staffs</a> -->
 
             <!-- <button onclick="href='<?php echo base_url('employee/custumers'); ?>'">Customers</button>
             <button onclick="location.href='<?php echo base_url('employee/stocks'); ?>'">Stocks</button>

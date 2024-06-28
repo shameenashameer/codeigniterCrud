@@ -47,7 +47,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add New Purchase</title>
+  <title>Add Costumer Data</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
@@ -86,30 +86,31 @@
     <div class="col-md-12 mt-4">
       <div class="card">
         <div class="card-header">
-          <h5>Add New Purchase
-            <a href="<?php echo base_url('employee/costumer_details/'.$customer[0]->id);?>" class="btn btn-danger btn-sm float-right btn-back">Back</a>
+          <h5>Add Shop details
+            <a href="<?php echo base_url('employee/shops');?>" class="btn btn-danger btn-sm float-right btn-back">Back</a>
           </h5>
         </div>
         <div class="card-body">
-          <form action="<?php echo base_url('employee/purchase_store/'.$customer[0]->id) ?>" method="POST">
-            <!-- <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" name="name"value="<?= $customer[0]->name ?>" class="form-control" readonly>
+          <form action="<?php echo base_url('employee/store') ?>" method="POST">
+            <div class="form-group">
+              <label for="name">Shop Name</label>
+              <input type="text" name="shop_name"value="" class="form-control">
               <small ><?php echo form_error('name'); ?></small>
 
-            </div> -->
-            <!-- <div class="form-group">
+            </div>
+            <div class="form-group">
               <label for="phone">Phone No</label>
               <input type="text" name="phone" value="" class="form-control">
               <small><?php echo form_error('phone'); ?></small>
 
-            </div> -->
-              <div class="form-group">
-                <label for="phone">Date</label>
-                <input type="date" id="date" name="date" value="" class="form-control">
-                <small><?php echo form_error('date'); ?></small>
-  
-              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Date</label>
+              <input type="date" id="date" name="date" value="" class="form-control">
+              <small><?php echo form_error('date'); ?></small>
+
+            </div>
+            <!-- <div class="form-group">
               <label for="phone">Amount</label>
               <input type="text" name="amount" value="" class="form-control">
               <small><?php echo form_error('amount'); ?></small>
@@ -119,7 +120,7 @@
               <label for="email">Credit</label>
               <input type="text" name="credit" value="" class="form-control">
               <small ><?php echo form_error('credit'); ?></small>
-            </div>
+            </div> -->
             <!-- <div class="form-group">
               <label for="email">Debit</label>
               <input type="text" name="debit" class="form-control">

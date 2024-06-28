@@ -38,6 +38,9 @@
             <a href="<?php echo base_url('employee/landing_page');?>" class="btn btn-danger btn-sm float-right btn-back">Back</a>
 
                         </h5>
+                        <h5 style="color:blue">Total Amount: <?php echo $amount_sum; ?></h5>
+                            <h5 style="color:green">Total Credit: <?php echo $credit_sum; ?></h5>
+                            <h5 style="color:red">Total Balance: <?php echo $balance_sum; ?></h5>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered" id="datatable1">
@@ -48,6 +51,8 @@
                                     <th>Phone No</th>
                                     <th>Date</th>
                                     <th>Balance</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,6 +63,7 @@
                                         <td><?php echo $row->phone; ?></td>
                                         <td><?php echo $row->date; ?></td>
                                         <td style="color:red"><?php echo $row->balance_sum; ?></td>
+                                        <!-- <td style="color:<?php echo ($employee->balance_sum > 0) ? 'red' : (($employee->balance_sum < 0) ? 'green' : 'black'); ?>"> -->
                                         <td>
                                             <a href="<?=base_url('employee/edit/'.$row->id);?>" class="btn btn-primary btn-sm">Edit</a>
                                         </td>
@@ -69,9 +75,7 @@
                             </tbody>
                         </table>
                         <div class="totals">
-                            <h5 style="color:blue">Total Amount: <?php echo $amount_sum; ?></h5>
-                            <h5 style="color:green">Total Credit: <?php echo $credit_sum; ?></h5>
-                            <h5 style="color:red">Total Balance: <?php echo $balance_sum; ?></h5>
+                            
                         </div>
                     </div>
                 </div>
