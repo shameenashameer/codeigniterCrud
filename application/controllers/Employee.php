@@ -50,6 +50,9 @@ class Employee extends CI_Controller{
     //    $data['employee']= $this->EmployeeModel->getEmployee();
 
         $data['employee']= $this->EmployeeModel->getCostomerDataWithBalance();
+    //    $custumer_id= $data->id;
+        // $data['costomer']= $this->EmployeeModel->get_customer_history($custumer_id);
+        // $data['costomer_balance_sum'] = $this->EmployeeModel->get_costomer_balance_sum($employee->id);
         $data['balance_sum'] = $this->EmployeeModel->get_balance_sum();
         $data['amount_sum'] = $this->EmployeeModel->get_amount_sum();
         $data['credit_sum'] = $this->EmployeeModel->get_credit_sum();
@@ -68,7 +71,9 @@ public function costumer_details($id){
     //     show_404();
     // }
     $data['purchase']= $this->EmployeeModel->getCostomerPurchaseDetails($id);
-
+    $data['balance_sum'] = $this->EmployeeModel->get_costomer_balance_sum($id);
+    $data['amount_sum'] = $this->EmployeeModel->get_costumer_amount_sum($id);
+    $data['credit_sum'] = $this->EmployeeModel->get_costomer_credit_sum($id);
     $this->load->view('frondend/costumer_details',$data);
     $this->load->view('template/footer');
 }
@@ -112,8 +117,8 @@ public function costumer_details($id){
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('phone', 'Phone No', 'required');
         $this->form_validation->set_rules('date', 'Date', 'required');
-        $this->form_validation->set_rules('amount', 'Amount', 'required');
-        $this->form_validation->set_rules('credit', 'Credit', 'required');
+        // $this->form_validation->set_rules('amount', 'Amount', 'required');
+        // $this->form_validation->set_rules('credit', 'Credit', 'required');
         // $this->form_validation->set_rules('debit', 'Debit', 'required');
         // $this->form_validation->set_rules('balance', 'Balance', 'required');
     
@@ -122,8 +127,8 @@ public function costumer_details($id){
                 "name" => $this->input->post('name'),
                 "phone" => $this->input->post('phone'),
                 "date" => $this->input->post('date'),
-                "amount" => $this->input->post('amount'),
-                "credit" => $this->input->post('credit'),
+                // "amount" => $this->input->post('amount'),
+                // "credit" => $this->input->post('credit'),
                 // "phone" => $this->input->post('debit'),
                 "balance" => $this->input->post('balance')
             ];

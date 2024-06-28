@@ -57,7 +57,13 @@
                                         <td><a href="<?= base_url('employee/costumer_details/' . $row->id); ?>"><?php echo $row->name; ?></a></td>
                                         <td><?php echo $row->phone; ?></td>
                                         <td><?php echo $row->date; ?></td>
-                                        <td style="color:red"><?php echo $row->balance; ?></td>
+                                        <td style="color:red"><?php echo $row->balance_sum; ?></td>
+                                        <td>
+                                            <a href="<?=base_url('employee/edit/'.$row->id);?>" class="btn btn-primary btn-sm">Edit</a>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo base_url('employee/delete/'.$row->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">Delete</a>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

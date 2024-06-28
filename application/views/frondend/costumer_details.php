@@ -43,7 +43,7 @@
                         <table class="table table-bordered" id="datatable1">
                             <thead>
                                 <tr class="text-center">
-                                    <th>Sl No</th>
+                                    <!-- <th>Sl No</th> -->
                                     <!-- <th>Name</th>
                                     <th>Phone No</th> -->
                                     <th>Date</th>
@@ -59,7 +59,7 @@
                                 </h5>
                                 <?php foreach($purchase as $row): ?>
                                     <tr class="text-center">
-                                        <td><?php echo $row->id; ?></td>
+                                        <!-- <td><?php echo $row->id; ?></td> -->
                                         <!-- <td><?php echo $row->name; ?></td>
                                         <td><?php echo $row->phone; ?></td> -->
                                         <td><?php echo $row->date; ?></td>
@@ -77,11 +77,11 @@
                             </tbody>
                         </table>
                         <!-- Uncomment these lines if you need to show total amounts -->
-                        <!-- <div class="totals text-center">
+                        <div class="totals text-center">
                             <h5 style="color:blue">Total Amount: <?php echo $amount_sum; ?></h5>
                             <h5 style="color:green">Total Credit: <?php echo $credit_sum; ?></h5>
                             <h5 style="color:red">Total Balance: <?php echo $balance_sum; ?></h5>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>

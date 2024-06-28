@@ -8,10 +8,18 @@ class EmployeeModel extends CI_Model
         $query= $this->db->get('students');
         return $query->result();
     }
-    public function getCostomerDataWithBalance(){
-        $this->db->select('id,name,phone, date, amount, credit, (amount - credit) as balance');
-        // $this->db->where('id', $id);
-        $query = $this->db->get('students');
+    // public function getCostomerDataWithBalance(){
+    //     $this->db->select('id,name,phone, date, amount, credit, (amount - credit) as balance');
+    //     // $this->db->where('id', $id);
+    //     $query = $this->db->get('students');
+    //     return $query->result();
+    // }
+    public function getCostomerDataWithBalance() {
+        $this->db->select('students.id, students.name, students.phone, MAX(purchases.date) as date, SUM(purchases.amount) as total_amount, SUM(purchases.credit) as total_credit, SUM(purchases.amount - purchases.credit) as balance_sum');
+        $this->db->from('students');
+        $this->db->join('purchases', 'students.id = purchases.customer_id', 'left');
+        $this->db->group_by('students.id');
+        $query = $this->db->get();
         return $query->result();
     }
     public function getCostomerPurchaseDataWithBalance($id){
@@ -49,6 +57,24 @@ class EmployeeModel extends CI_Model
         $this->db->select_sum('balance');
         $query = $this->db->get('students');
         return $query->row()->balance;
+    }
+    public function get_costomer_balance_sum($id) {
+        $this->db->select_sum('balance');
+        $this->db->where('customer_id', $id);
+        $query = $this->db->get('purchases');
+        return $query->row()->balance;
+    }
+    public function get_costumer_amount_sum($id) {
+        $this->db->select_sum('amount');
+        $this->db->where('customer_id', $id);
+        $query = $this->db->get('purchases');
+        return $query->row()->amount;
+    }
+    public function get_costomer_credit_sum($id) {
+        $this->db->select_sum('credit');
+        $this->db->where('customer_id', $id);
+        $query = $this->db->get('purchases');
+        return $query->row()->credit;
     }
     
     public function get_amount_sum() {
