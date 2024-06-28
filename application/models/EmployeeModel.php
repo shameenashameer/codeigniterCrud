@@ -10,17 +10,41 @@ class EmployeeModel extends CI_Model
     }
     public function getCostomerDataWithBalance(){
         $this->db->select('id,name,phone, date, amount, credit, (amount - credit) as balance');
+        // $this->db->where('id', $id);
         $query = $this->db->get('students');
         return $query->result();
     }
-    public function get_customer_history($id) {
-        $this->db->select('*');
-        $this->db->from('students');
+    public function getCostomerPurchaseDataWithBalance($id){
+        $this->db->select('id,name,phone, date, amount, credit, (amount - credit) as balance');
         $this->db->where('id', $id);
+        $query = $this->db->get('students');
+        return $query->result();
+    }
+    public function getCostomerPurchaseDetails($id){
+        $this->db->select('id,date, amount, credit, (amount - credit) as balance');
+        $this->db->where('customer_id', $id);
+        $query = $this->db->get('purchases');
+        return $query->result();
+    }
+    public function get_customer_history($id) {
+        $this->db->select('purchases.*, students.name as customer_name');
+
+        $this->db->from('purchases');
+    $this->db->join('students', 'purchases.customer_id = students.id');
+    $this->db->where('purchases.customer_id', $id);
         $this->db->order_by('date', 'desc');
         $query = $this->db->get();
         return $query->result();
+        
     }
+//     public function get_purchases($id) {
+//         $this->db->select('purchases.*, students.name as customer_name');
+//         $this->db->from('purchases');
+//         $this->db->join('students', 'purchases.customer_id = students.id');
+//        $this->db->where('purchases.customer_id', $id);
+//  $query = $this->db->get();
+//         return $query->result_array();
+//     }
     public function get_balance_sum() {
         $this->db->select_sum('balance');
         $query = $this->db->get('students');
@@ -43,6 +67,14 @@ class EmployeeModel extends CI_Model
     {
         $data['balance'] = $data['amount'] - $data['credit'];
         return $this->db->insert('students',$data);
+        // return $query->result();
+    }
+    public function insert_purchase($data,$id)
+    {
+        // $data['name'] = $data['id'] - $data['credit'];
+        $data['balance'] = $data['amount'] - $data['credit'];
+        $data['customer_id'] = $id;
+        return $this->db->insert('purchases',$data);
         // return $query->result();
     }
 public function editEmployee($id){
@@ -72,6 +104,11 @@ public function calculate_sum($customer_id, $column) {
     return $result->$column;
 }
 
+public function get_customer_by_id($id) {
+    $this->db->where('id', $id);
+    $query = $this->db->get('customers'); // Assuming 'customers' is your table name
+    return $query->row();
+}
 }
 
 ?>

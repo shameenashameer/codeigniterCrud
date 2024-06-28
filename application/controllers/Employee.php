@@ -61,7 +61,13 @@ public function costumer_details($id){
 
     $this->load->view('template/header');
     $this->load->model("EmployeeModel");
-    $data['costumer']= $this->EmployeeModel->get_customer_history($id);
+    $data['customer']= $this->EmployeeModel->getCostomerPurchaseDataWithBalance($id);
+    // $data['customer']= $this->EmployeeModel->getCostomerDataWithBalance();
+    // $data['customer_purchases'] = $this->Customer_model->get_customer_history($id);
+    // if (empty($data['customer'])) {
+    //     show_404();
+    // }
+    $data['purchase']= $this->EmployeeModel->getCostomerPurchaseDetails($id);
 
     $this->load->view('frondend/costumer_details',$data);
     $this->load->view('template/footer');
@@ -87,6 +93,18 @@ public function costumer_details($id){
 
         $this->load->view('template/header');
         $this->load->view('frondend/create');
+        $this->load->view('template/footer');
+    }
+    public function add_purchase($id){
+
+        $this->load->view('template/header');
+        $this->load->model("EmployeeModel");
+    $data['customer']= $this->EmployeeModel->getCostomerPurchaseDataWithBalance($id);
+
+        // $data['costumer']= $this->EmployeeModel->get_customer_history($id);
+        // print_r($data['costumer']);
+        // die;
+        $this->load->view('frondend/add_purchase',$data);
         $this->load->view('template/footer');
     }
     public function store(){
@@ -120,6 +138,42 @@ public function costumer_details($id){
 
             $this->session->set_flashdata('status', 'Costumer data inserted successfully');
             redirect(base_url('employee/costumers'));
+        }
+        else {
+            redirect('employee/create');
+        }
+    }
+    public function purchase_store($id){
+        // $this->load->library('form_validation');
+        // $this->form_validation->set_rules('name', 'Name', 'required');
+        // $this->form_validation->set_rules('phone', 'Phone No', 'required');
+        $this->form_validation->set_rules('date', 'Date', 'required');
+        $this->form_validation->set_rules('amount', 'Amount', 'required');
+        $this->form_validation->set_rules('credit', 'Credit', 'required');
+        // $this->form_validation->set_rules('debit', 'Debit', 'required');
+        // $this->form_validation->set_rules('balance', 'Balance', 'required');
+    
+        if($this->form_validation->run()){
+            $data = [
+                // "name" => $this->input->post('name'),
+                // "phone" => $this->input->post('phone'),
+                "date" => $this->input->post('date'),
+                "amount" => $this->input->post('amount'),
+                "credit" => $this->input->post('credit'),
+                // "phone" => $this->input->post('debit'),
+                "balance" => $this->input->post('balance')
+            ];
+    $this->load->model('EmployeeModel',"emp");
+
+    $this->emp->insert_purchase($data,$id);
+            // Insert data into database
+            // $this->db->insert('student_db', $data);
+            
+            // Redirect to employee list page
+            // redirect(base_url('employee/emp'));
+
+            $this->session->set_flashdata('status', 'New Purchase inserted successfully');
+            redirect(base_url('employee/costumer_details/'.$id));
         }
         else {
             redirect('employee/create');
@@ -183,6 +237,22 @@ public function delete($id){
 //     $this->load->model('EmployeeModel',"emp");
 //     $data['employee']= $this->emp->editEmployee($id);
 
+// }
+
+// public function details($id) {
+//     // Load model
+//     $this->load->model('Employee_model');
+    
+//     // Fetch customer details
+//     $data['customer'] = $this->Employee_model->get_customer_by_id($id);
+    
+//     // Check if customer data is found
+//     if (empty($data['customer'])) {
+//         show_404(); // Show 404 page if customer not found
+//     }
+
+//     // Load the details view
+//     $this->load->view('employee/details', $data);
 // }
 
 }
