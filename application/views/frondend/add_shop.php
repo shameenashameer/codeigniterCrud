@@ -91,7 +91,7 @@
           </h5>
         </div>
         <div class="card-body">
-          <form action="<?php echo base_url('employee/store') ?>" method="POST">
+          <form action="<?php echo base_url('employee/shop_store') ?>" method="POST">
             <div class="form-group">
               <label for="name">Shop Name</label>
               <input type="text" name="shop_name"value="" class="form-control">

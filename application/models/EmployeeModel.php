@@ -36,6 +36,18 @@ class EmployeeModel extends CI_Model
         $query = $this->db->get('students');
         return $query->result();
     }
+    public function get_shop_details($id){
+        $this->db->select('id,shop_name,phone, date, amount, debit, (amount - debit) as balance');
+        $this->db->where('id', $id);
+        $query = $this->db->get('shops');
+        return $query->result();
+    }
+    public function get_stock_details($id){
+        $this->db->select('id, date, amount, debit, (amount - debit) as balance');
+        $this->db->where('shop_id', $id);
+        $query = $this->db->get('stocks');
+        return $query->result();
+    }
     public function getCostomerPurchaseDetails($id){
         $this->db->select('id,date, amount, credit, (amount - credit) as balance');
         $this->db->where('customer_id', $id);
@@ -66,17 +78,23 @@ class EmployeeModel extends CI_Model
         $query = $this->db->get('purchases');
         return $query->row()->balance;
     }
-    public function get_stock_balance_sum() {
+    public function get_stocks_balance_sum() {
         $this->db->select_sum('balance');
         $query = $this->db->get('stocks');
         return $query->row()->balance;
     }
-    public function get_stock_amount_sum() {
+    public function get_shop_stocks_balance_sum($id) {
+        $this->db->select_sum('balance');
+        $this->db->where('shop_id', $id);
+        $query = $this->db->get('stocks');
+        return $query->row()->balance;
+    }
+    public function get_stocks_amount_sum() {
         $this->db->select_sum('amount');
         $query = $this->db->get('stocks');
         return $query->row()->amount;
     }
-    public function get_stock_debit_sum() {
+    public function get_stocks_debit_sum() {
         $this->db->select_sum('debit');
         $query = $this->db->get('stocks');
         return $query->row()->debit;
@@ -118,6 +136,12 @@ class EmployeeModel extends CI_Model
         return $this->db->insert('students',$data);
         // return $query->result();
     }
+    public function insertShop($data)
+    {
+        $data['balance'] = $data['amount'] - $data['credit'];
+        return $this->db->insert('shops',$data);
+        // return $query->result();
+    }
     public function insert_purchase($data,$id)
     {
         
@@ -127,9 +151,32 @@ class EmployeeModel extends CI_Model
         return $this->db->insert('purchases',$data);
         // return $query->result();
     }
+    public function insert_stock($data,$id)
+    {
+        
+        // $data['name'] = $data['id'] - $data['credit'];
+        $data['balance'] = $data['amount'] - $data['debit'];
+        $data['shop_id'] = $id;
+        return $this->db->insert('stocks',$data);
+        // return $query->result();
+    }
 public function editEmployee($id){
 
     $query = $this->db->get_where('students', ['id' => $id]);
+
+    return $query->row();
+    
+}
+public function edit_purchase($id){
+
+    $query = $this->db->get_where('purchases', ['customer_id' => $id]);
+
+    return $query->row();
+    
+}
+public function edit_shop($id){
+
+    $query = $this->db->get_where('shops', ['id' => $id]);
 
     return $query->row();
     
@@ -141,10 +188,26 @@ public function updateEmployee($data,$id){
     $data['balance'] = $data['amount'] - $data['credit'];
    return $this->db->update('students',$data, ['id' => $id]);
 }
+public function update_purchase($data,$id){
+
+
+    $data['balance'] = $data['amount'] - $data['credit'];
+   return $this->db->update('purchases',$data, ['id' => $id]);
+}
+public function update_shop($data,$id){
+
+
+    // $data['balance'] = $data['amount'] - $data['credit'];
+   return $this->db->update('shops',$data, ['id' => $id]);
+}
 
 public function deleteEmployee($id){
 
    return  $this->db->delete('students', ['id' => $id]);
+}
+public function delete_shop($id){
+
+   return  $this->db->delete('shops', ['id' => $id]);
 }
 public function purchase_delete($id){
 
