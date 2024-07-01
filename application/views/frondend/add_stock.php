@@ -110,6 +110,8 @@
                 <small><?php echo form_error('date'); ?></small>
   
               </div>
+              <div class="form-group">
+
               <label for="phone">Amount</label>
               <input type="text" name="amount" value="" class="form-control">
               <small><?php echo form_error('amount'); ?></small>

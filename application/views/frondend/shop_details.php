@@ -50,8 +50,8 @@
                                     <th>Amount</th>
                                     <th>Debit</th>
                                     <th>Balance</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <!-- <th>Edit</th>
+                                    <th>Delete</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,12 +64,12 @@
                                         <td style="color:blue"><?php echo $row->amount; ?></td>
                                         <td style="color:green"><?php echo $row->debit; ?></td>
                                         <td style="color:red"><?php echo $row->balance; ?></td>
-                                        <td>
+                                        <!-- <td>
                                             <a href="<?= base_url('employee/edit_stock/'.$row->id); ?>" class="btn btn-primary btn-sm">Edit</a>
                                         </td>
                                         <td>
                                             <a href="<?php echo base_url('employee/delete_stock/'.$row->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">Delete</a>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

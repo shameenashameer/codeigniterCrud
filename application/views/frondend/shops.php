@@ -52,8 +52,7 @@
                                     <th>Phone No</th>
                                     <th>Date</th>
                                     <th>Balance</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,12 +68,12 @@
                                         <!-- <td style="color:green"><?php echo $row->debit; ?></td> -->
                                         <td style="color:red"><?php echo $row->balance_sum; ?></td>
                                         <!-- <td style="color:<?php echo ($employee->balance_sum > 0) ? 'red' : (($employee->balance_sum < 0) ? 'green' : 'black'); ?>"> -->
-                                        <td>
+                                        <!-- <td>
                                             <a href="<?=base_url('employee/shop_edit/'.$row->id);?>" class="btn btn-primary btn-sm">Edit</a>
                                         </td>
                                         <td>
                                             <a href="<?php echo base_url('employee/shop_delete/'.$row->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to delete?')">Delete</a>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>

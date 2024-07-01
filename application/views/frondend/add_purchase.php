@@ -110,6 +110,8 @@
                 <small><?php echo form_error('date'); ?></small>
   
               </div>
+              <div class="form-group">
+
               <label for="phone">Amount</label>
               <input type="text" name="amount" value="" class="form-control">
               <small><?php echo form_error('amount'); ?></small>
@@ -120,16 +122,7 @@
               <input type="text" name="credit" value="" class="form-control">
               <small ><?php echo form_error('credit'); ?></small>
             </div>
-            <!-- <div class="form-group">
-              <label for="email">Debit</label>
-              <input type="text" name="debit" class="form-control">
-              < <small ><?php //echo form_error('debit'); ?></small> 
-            </div> -->
-            <div class="form-group">
-              <!-- <label for="balance">Balance</label> -->
-              <input type="hidden" name="balance" value="balance" class="form-control">
-              <!-- <small ><?php// echo form_error('balance'); ?></small> -->
-            </div>
+          
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Save</button> 
             </div>
